@@ -30,9 +30,9 @@ def run_java(directory, input, output):
     except Exception as e:
         return "An error occurred during execution: " + str(e)
     
-def validade_java(directory, input, output):
+def validade_java(directory, input_file_dir, output_file_dir, answer_file_dir):
     try:
-        with open(os.path.join(directory, input), 'r') as input_file:
+        with open(os.path.join(directory, input_file_dir), 'r') as input_file:
             inputs = input_file.read().split('===')
         
         results = []
@@ -48,11 +48,19 @@ def validade_java(directory, input, output):
             with open(temp_output_path, 'r') as temp_output_file:
                 output_content = temp_output_file.read()
             
-            with open(os.path.join(directory, output), 'a') as output_file:
-                output_file.write(f'===\n{output_content}\n')
+            with open(os.path.join(directory, output_file_dir), 'a') as output_file:
+                output_file.write(f'===\n{output_content}'.encode('utf-8').decode('unicode_escape'))
             os.remove(temp_input_path)
             os.remove(temp_output_path)
+        with open(os.path.join(directory, output_file_dir), 'r', encoding='utf-8') as output_file:
+                output = output_file.read().split('===')
+        with open(os.path.join(directory, answer_file_dir), 'r', encoding='utf-8') as answer_file:
+            answer = answer_file.read().split('===')
         
-        return results
+        if output == answer:
+            return "All outputs match the expected answers."
+        else:
+            return "Some outputs do not match the expected answers."
+
     except Exception as e:
         return "An error occurred during validation: " + str(e)
