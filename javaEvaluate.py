@@ -33,7 +33,7 @@ def evaluate_java(directory, response_file_dir):
 
     if isinstance(codes, Exception):
         return "An error occurred: " + str(codes)
-    response = ""
+    response = "############\nValidação\n############\n"
     for pattern in EVALUATE_PATTERNS:
         response += pattern+":\n"+agent_call(PROMPT + pattern + codes)+'\n======================================\n'
 
