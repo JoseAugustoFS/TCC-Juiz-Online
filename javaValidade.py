@@ -1,6 +1,8 @@
 import subprocess
 import os
 
+system = os.name
+
 def run_java(directory, input, output):
     try:
         # Find the main Java class file
@@ -48,8 +50,14 @@ def validade_java(directory, input_file_dir, output_file_dir, answer_file_dir):
             with open(temp_output_path, 'r') as temp_output_file:
                 output_content = temp_output_file.read()
             
+            if system == 'nt':  # Windows
+                decodeType = 'unicode_escape'
+            else: #Linux ou macOS (ou qualquer outro)
+                decodeType = 'utf-8'
+
             with open(os.path.join(directory, output_file_dir), 'a') as output_file:
-                output_file.write(f'===\n{output_content}'.encode('utf-8').decode('unicode_escape'))
+                output_file.write(f'===\n{output_content}'.encode('utf-8').decode(decodeType))
+  
             os.remove(temp_input_path)
             os.remove(temp_output_path)
         with open(os.path.join(directory, output_file_dir), 'r', encoding='utf-8') as output_file:
