@@ -3,21 +3,24 @@ from JavaJudge.javaValidade import validade_java
 from JavaJudge.javaEvaluate import evaluate_java
 from JavaJudge.javaOptimize import optmize_java
 
-def judge(directory):
+def judge(directory, inputs, answers, statement):
     compilation = compile_java(directory)
     if(compilation["status"]):
-        validated_percent = validade_java(directory,'entradas.txt', 'saida.txt','resposta.txt')
-        if(validated_percent == 100.0):
-            evalutation = evaluate_java(directory, 'avaliacao.txt')
-            optimization = optmize_java(directory, 'Faça uma classe calculadora que consiga somar e subtrair.', 'avaliacao.txt')
+        validation = validade_java(directory, inputs, answers)
+        if(validation["validated_percent"] == 100.0):
+            evalutation = evaluate_java(directory)
+            optimization = optmize_java(directory, statement)
             return {
                 "compilation": compilation["message"], 
-                "validated_percent": validated_percent, 
-                "evalutation": evalutation["message"], 
-                "optimization": optimization["message"]
+                "validated_percent": validation["validated_percent"],
+                "validation_result": validation["result"],
+                "evalutation": evalutation["message"],
+                "evalutation_result": evalutation["result"], 
+                "optimization": optimization["message"],
+                "optimization_result": optimization["result"]
                 }
         else:
-            return {"compilation": compilation["message"], "validated_percent": validated_percent}
+            return {"compilation": compilation["message"], "validated_percent": validation["validated_percent"], "validation_result": validation["result"]}
     else:
         return compilation["message"]
 

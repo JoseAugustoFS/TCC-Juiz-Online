@@ -23,18 +23,20 @@ def get_java_codes(directory):
     except Exception as e:
         return e
 
-def optmize_java(directory, statement, response_file_dir):
+def optmize_java(directory, statement):
     updatedPrompt = PROMPT + statement + " Tópico: "
     codes = get_java_codes(directory)
 
     if isinstance(codes, Exception):
-        return {"message": "An error occurred: " + str(codes)}
-    response = "############\nOtimização\n############\n"
-    for pattern in OPTMIZE_PATTERNS:
-        response += pattern+":\n"+agent_call(PROMPT + pattern + codes)+'\n======================================\n'
+        return {"message": "An error occurred: " + str(codes), "result": ""}
+    
+    try:
+        result = []
 
-    with open(os.path.join(directory, response_file_dir), 'a') as response_file:
-            response_file.write(response.encode('utf-8').decode('unicode_escape'))
+        for pattern in OPTMIZE_PATTERNS:
+            result.append(agent_call(updatedPrompt + pattern + codes))
 
-    return {"message": "Code optimized"}
+        return {"message": "Code optimized", "result": result}
+    except Exception as e:
+            return {"message": "An error occurred: " + str(e), "result": ""}
     
