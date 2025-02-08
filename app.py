@@ -29,30 +29,31 @@ if __name__ == "__main__":
 
         print(result["compilation"])
         print(result["validated_percent"])
-        print(result["evalutation"])
-        print(result["optimization"])
+        if (result["validated_percent"] == 100.0):
+            print(result["evalutation"])
+            print(result["optimization"])
 
 
-        response = "############\nValidação\n############\n"
-        for index, evalutation_result in enumerate(result["evalutation_result"]):
-            response += "Teste "+str(index+1)+":\n"+evalutation_result+"\n======================================\n"
-        response +="############\nOtimização\n############\n"
-        for index, optimization_result in enumerate(result["optimization_result"]):
-            response += "Teste "+str(index+1)+":\n"+optimization_result+"\n======================================\n"
+            response = "############\nValidação\n############\n"
+            for index, evalutation_result in enumerate(result["evalutation_result"]):
+                response += "Teste "+str(index+1)+":\n"+evalutation_result+"\n======================================\n"
+            response +="############\nOtimização\n############\n"
+            for index, optimization_result in enumerate(result["optimization_result"]):
+                response += "Teste "+str(index+1)+":\n"+optimization_result+"\n======================================\n"
 
-        if system == "nt":  # Windows
-                decodeType = "unicode_escape"
-        else: #Linux ou macOS (ou qualquer outro)
-            decodeType = "utf-8"
-        try:
-            with open(os.path.join(java_io_directory, "saida.txt"), "a") as output_file:
-                output_file.truncate(0)
-                output_file.write(str("===\n"+"\n===\n".join(result["validation_result"])).encode("utf-8").decode(decodeType))
-            with open(os.path.join(java_io_directory, "avaliacao.txt"), "a") as response_file:
-                response_file.truncate(0)
-                response_file.write(response.encode('utf-8').decode(decodeType))
-        except Exception as e:
-            print("Error: " + str(e))
+            if system == "nt":  # Windows
+                    decodeType = "unicode_escape"
+            else: #Linux ou macOS (ou qualquer outro)
+                decodeType = "utf-8"
+            try:
+                with open(os.path.join(java_io_directory, "saida.txt"), "a") as output_file:
+                    output_file.truncate(0)
+                    output_file.write(str("===\n"+"\n===\n".join(result["validation_result"])).encode("utf-8").decode(decodeType))
+                with open(os.path.join(java_io_directory, "avaliacao.txt"), "a") as response_file:
+                    response_file.truncate(0)
+                    response_file.write(response.encode('utf-8').decode(decodeType))
+            except Exception as e:
+                print("Error: " + str(e))
 
     elif (language=="C"):
         print("Implementar C")

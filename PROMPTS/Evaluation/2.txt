@@ -1,0 +1,3 @@
+Com base em todos os códigos abaixo, tanto em Java quanto em C, e ignorando que seus pacotes estão comentados, confirme se o código faz uso de constantes e avalie se seu uso é realmente necessário.
+
+Caso o código utilize constantes onde não é necessário, responda "Inválido" e explique por que o uso excessivo de constantes pode tornar o código menos flexível. Se o uso de constantes for apropriado e necessário, responda "Válido".

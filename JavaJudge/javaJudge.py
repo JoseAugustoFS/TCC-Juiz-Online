@@ -22,7 +22,7 @@ def judge(directory, inputs, answers, statement):
         else:
             return {"compilation": compilation["message"], "validated_percent": validation["validated_percent"], "validation_result": validation["result"]}
     else:
-        return compilation["message"]
+        return {"compilation": compilation["message"], "validated_percent": 0}
 
 
 

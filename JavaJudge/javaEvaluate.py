@@ -1,15 +1,20 @@
 import os
 from IA_Agent import agent_call
 
-EVALUATE_PATTERNS = ["Condenar o uso de variável global",
-                     "Avaliar a possibilidade de uso de constantes no código, apenas se necessário",
-                     "Nome das variáveis, identificadores e classes",
-                     "Tratar a formatação",
-                     "Avaliar se as variáveis estão sendo inicializadas",
-                     "Tratar identação",
-                     "Verificar identificadores não utilizados"]
-
-PROMPT = "Com base em todos os códigos java abaixo e ignorando que seus pacotes estão comentados, confirme se eles seguem as boas práticas de programação conforme especificamente (caso sigam informe apenas Válido, caso não informe Inválido e na linha abaixo explique o porque está inválido): "
+def load_prompts(directory='PROMPTS/Evaluation'):
+    prompts = []
+    for i in range(1, 8):  # Ajuste o número 8 se o número de arquivos for diferente
+        file_path = os.path.join(directory, f"{i}.txt")
+        
+        # Verifica se o arquivo existe antes de tentar abrir
+        if not os.path.isfile(file_path):
+            raise FileNotFoundError(f"O arquivo '{file_path}' não foi encontrado.")
+        
+        # Lê o conteúdo do arquivo e adiciona na lista
+        with open(file_path, 'r', encoding='utf-8') as file:
+            prompts.append(file.read().strip())
+    
+    return prompts
 
 def get_java_codes(directory):
     try:
@@ -30,13 +35,14 @@ def get_java_codes(directory):
 def evaluate_java(directory):
     
     codes = get_java_codes(directory)
+    prompts = load_prompts()
 
     if isinstance(codes, Exception):
         return {"message": "An error occurred: " + str(codes), "result": ""}
     try:
         result = []
-        for pattern in EVALUATE_PATTERNS:
-            result.append(agent_call(PROMPT + pattern + codes))
+        for prompt in prompts:
+            result.append(agent_call(prompt + codes))
         return {"message": "Code evaluate", "result": result}
     except Exception as e:
             return {"message": "An error occurred: " + str(e), "result": ""}

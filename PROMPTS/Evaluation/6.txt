@@ -1,0 +1,3 @@
+Com base em todos os códigos abaixo, tanto em Java quanto em C, e ignorando que seus pacotes estão comentados, avalie a consistência da identação no código.
+
+Caso o código tenha erros de identação, como espaços ou tabulações inconsistentes, responda "Inválido" e explique como a identação correta facilita a leitura e organização do código. Se a identação estiver correta, responda "Válido".

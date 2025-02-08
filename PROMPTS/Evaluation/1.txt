@@ -1,0 +1,3 @@
+Com base em todos os códigos abaixo, tanto em Java quanto em C, e ignorando que seus pacotes estão comentados, confirme se o código segue as boas práticas de programação, especificamente em relação ao uso de variáveis globais.
+
+Caso o código utilize variáveis globais, responda "Inválido" e explique por que o uso de variáveis globais é prejudicial, como o aumento da complexidade e o risco de manipulação indesejada dos dados. Se o código não usar variáveis globais, responda "Válido".

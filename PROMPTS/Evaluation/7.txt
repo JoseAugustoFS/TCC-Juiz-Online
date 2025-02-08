@@ -1,0 +1,3 @@
+Com base em todos os códigos abaixo, tanto em Java quanto em C, e ignorando que seus pacotes estão comentados, verifique se há identificadores não utilizados no código, como variáveis, funções ou estruturas que são declaradas mas nunca utilizadas.
+
+Caso identifique identificadores não utilizados, responda "Inválido" e explique como a remoção de código não utilizado pode melhorar a performance e clareza do código. Se não houver identificadores não utilizados, responda "Válido".

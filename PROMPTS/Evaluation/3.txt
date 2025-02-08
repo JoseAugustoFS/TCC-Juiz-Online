@@ -1,0 +1,3 @@
+Com base em todos os códigos abaixo, tanto em Java quanto em C, e ignorando que seus pacotes estão comentados, confirme se os nomes das variáveis, identificadores e classes (ou funções e estruturas, no caso de C) seguem as convenções de nomenclatura adequadas.
+
+Caso os nomes sejam pouco claros, como nomes genéricos ou confusos, responda "Inválido" e explique como uma nomenclatura clara e descritiva é importante para a legibilidade do código. Se os nomes forem apropriados e seguirem as boas práticas, responda "Válido".

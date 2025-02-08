@@ -1,0 +1,3 @@
+Com base em todos os códigos abaixo, tanto em Java quanto em C, e ignorando que seus pacotes estão comentados, verifique se todas as variáveis estão sendo inicializadas corretamente antes de serem usadas.
+
+Caso haja variáveis não inicializadas, responda "Inválido" e explique os riscos de utilizar variáveis sem inicialização adequada, como valores imprevisíveis ou falhas de execução. Se todas as variáveis estiverem devidamente inicializadas, responda "Válido".

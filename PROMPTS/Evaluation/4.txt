@@ -1,0 +1,3 @@
+Com base em todos os códigos abaixo, tanto em Java quanto em C, e ignorando que seus pacotes estão comentados, verifique se o código segue as boas práticas de formatação, como uso adequado de espaçamento, quebras de linha, alinhamento de código e comentários.
+
+Caso o código tenha formatação inconsistente ou desleixada, responda "Inválido" e explique como a formatação correta melhora a legibilidade e manutenção do código. Se o código estiver bem formatado, responda "Válido".

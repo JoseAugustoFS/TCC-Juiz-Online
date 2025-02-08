@@ -1,0 +1,6 @@
+O código pode ser em JAVA ou C.
+
+Otimizar uso das estruturas de repetição, apenas se houver necessidade usar
+
+Com base no enunciado abaixo e em todos os códigos (JAVA ou C) abaixo e ignorando que seus pacotes estão comentados, confirme se eles estão otimizados conforme especificamente o tópico abaixo, leve em conta se está tudo otimizado em relação ao que o enunciado pede, evitando coisas desnecessárias (caso sim informe apenas 'Otimizado', caso não informe 'Não otimizado' e na linha abaixo explique o porque está inválido): Enunciado:
+
