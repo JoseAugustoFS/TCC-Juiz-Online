@@ -61,14 +61,15 @@ def validade_java(directory, input_file_dir, output_file_dir, answer_file_dir):
             os.remove(temp_input_path)
             os.remove(temp_output_path)
         with open(os.path.join(directory, output_file_dir), 'r', encoding='utf-8') as output_file:
-                output = output_file.read().split('===')
+            output = output_file.read().split('===')
+            output = [x.strip() for x in output if x.strip()]
         with open(os.path.join(directory, answer_file_dir), 'r', encoding='utf-8') as answer_file:
             answer = answer_file.read().split('===')
+            answer = [x.strip() for x in answer if x.strip()]
         
-        if output == answer:
-            return "All outputs match the expected answers."
-        else:
-            return "Some outputs do not match the expected answers."
+        correct_count = sum(1 for o, a in zip(output, answer) if o == a)
+        return correct_count/len(output)*100
 
     except Exception as e:
-        return "An error occurred during validation: " + str(e)
+        print("An error occurred during validation: " + str(e))
+        return -1

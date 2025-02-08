@@ -35,10 +35,10 @@ def compile_java(directory):
             result = subprocess.run(['javac'] + java_files, capture_output=True, text=True)
             
             if result.returncode == 0:
-                return "Compilation successful."
+                return {"status": True, "message": "Compilation successful."}
             else:
-                return "Compilation failed." + result.stderr
+                return {"status": False, "message": "Compilation failed." + result.stderr}
         else:
-            return "No Java files found to compile."
+            return {"status": False, "message": "No Java files found to compile."}
     except Exception as e:
-        return "An error occurred: " + str(e)
+        return {"status": False, "message": "An error occurred: " + str(e)}

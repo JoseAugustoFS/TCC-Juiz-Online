@@ -1,19 +1,19 @@
-from javaCompile import compile_java
-from javaValidade import validade_java
-from javaEvaluate import evaluate_java
-from javaOptimize import optmize_java
-import time
+from JavaJudge.javaJudge import judge
 
 if __name__ == "__main__":
     
-    java_directory = 'javaCodes'
-    
-    print(compile_java(java_directory))
-    print(validade_java(java_directory,'entradas.txt', 'saida.txt','resposta.txt'))
+    language = "JAVA"
 
-    print(evaluate_java(java_directory, 'avaliacao.txt'))
-    print(optmize_java(java_directory, 'Faça uma classe calculadora que consiga somar e subtrair.', 'avaliacao.txt'))
+    if(language=="JAVA"):
+        java_directory = './javaCodes'
 
-    time.sleep(0.5)
-    with open(java_directory+'/saida.txt', 'w') as file:
-        file.truncate(0)
+        with open(java_directory+'/saida.txt', 'w') as file:
+            file.truncate(0)
+        with open(java_directory+'/avaliacao.txt', 'w') as file:
+            file.truncate(0)
+        
+        print(judge(java_directory))
+    elif (language=="C"):
+        print("Implementar C")
+    else:
+        print("Invalid language.")

@@ -32,7 +32,7 @@ def evaluate_java(directory, response_file_dir):
     codes = get_java_codes(directory)
 
     if isinstance(codes, Exception):
-        return "An error occurred: " + str(codes)
+        return {"message": "An error occurred: " + str(codes)}
     response = "############\nValidação\n############\n"
     for pattern in EVALUATE_PATTERNS:
         response += pattern+":\n"+agent_call(PROMPT + pattern + codes)+'\n======================================\n'
@@ -40,5 +40,5 @@ def evaluate_java(directory, response_file_dir):
     with open(os.path.join(directory, response_file_dir), 'w') as response_file:
             response_file.write(response.encode('utf-8').decode('unicode_escape'))
 
-    return 'Code evaluate'
+    return {"message": "Code evaluate"}
     
