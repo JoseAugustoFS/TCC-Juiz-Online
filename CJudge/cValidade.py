@@ -1,78 +1,96 @@
-import subprocess
 import os
+import subprocess
 
-def run_c(directory, input_file, output_file):
-    try:
-        # Encontrar o arquivo C com a função main
-        main_class = None
-        for root, _, files in os.walk(directory):
-            for file in files:
-                if file.endswith('.c'):
-                    main_class = os.path.splitext(file)[0]
-                    break
-        
-        if main_class:
-            # Compilar o código C
-            input_path = os.path.join(directory, input_file)
-            output_path = os.path.join(directory, output_file)
 
-            # Compilar o código C
-            result = subprocess.run(['gcc', os.path.join(directory, f'{main_class}.c'), '-o', os.path.join(directory, main_class)], capture_output=True, text=True)
-            
-            if result.returncode != 0:
-                return f"Erro na compilação:\n{result.stderr}"
+class cValidade:
+    def __init__(self, source_code, executable, input_file, output_file):
+        """
+        Inicializa a classe com os caminhos necessários.
 
-            # Executar o programa C com redirecionamento de entrada e saída
-            with open(input_path, 'r') as input_file, open(output_path, 'w') as output_file:
-                result = subprocess.run([os.path.join(directory, main_class)], stdin=input_file, stdout=output_file, stderr=subprocess.PIPE, text=True, cwd=directory)
+        :param source_code: Caminho para o arquivo C a ser compilado.
+        :param executable: Caminho para o executável gerado após compilação.
+        :param input_file: Caminho para o arquivo contendo as entradas.
+        :param output_file: Caminho para o arquivo contendo as saídas esperadas.
+        """
+        self.source_code = source_code
+        self.executable = executable
+        self.input_file = input_file
+        self.output_file = output_file
+        self.system = os.name  # Identifica o sistema operacional
 
-            if result.returncode == 0:
-                return "Execução bem-sucedida."
-            else:
-                return f"Falha na execução: {result.stderr}"
-        else:
-            return "Nenhuma classe principal encontrada para executar."
-    except Exception as e:
-        return "Ocorreu um erro durante a execução: " + str(e)
+    def compile(self):
+        """
+        Compila o código C e verifica se há erros de compilação.
+        """
+        compile_process = subprocess.run(
+            ["gcc", self.source_code, "-o", self.executable],
+            capture_output=True,
+            text=True,
+        )
 
-def validade_c(directory, input, output):
-    try:
-        with open(os.path.join(directory, input), 'r') as input_file:
-            inputs = input_file.read().split('===')  # Separar os casos de teste
-        
-        results = []
-        for i, single_input in enumerate(inputs):
-            temp_input_path = os.path.join(directory, f'temp_input_{i}.txt')
-            temp_output_path = os.path.join(directory, f'temp_output_{i}.txt')
-            
-            with open(temp_input_path, 'w') as temp_input_file:
-                temp_input_file.write(single_input.strip())
-            
-            result = run_c(directory, f'temp_input_{i}.txt', f'temp_output_{i}.txt')
-            results.append(result)
-            
-            with open(temp_output_path, 'r') as temp_output_file:
-                output_content = temp_output_file.read()
-            
-            # Escrevendo a frase final no arquivo de saída
-            with open(os.path.join(directory, output), 'a') as output_file:
-                output_file.write(f'===\n{output_content.strip()}\n')
+        if compile_process.returncode != 0:
+            print("❌ Erro na compilação do código C:\n", compile_process.stderr)
+            return False
 
-            # Remover arquivos temporários
-            os.remove(temp_input_path)
-            os.remove(temp_output_path)
-        
-        return results
-    except Exception as e:
-        return "Ocorreu um erro durante a validação: " + str(e)
+        print("✅ Compilação bem-sucedida.")
+        return True
 
-# Caminho do diretório onde o código C está localizado
-diretorio = r"C:\Users\Marcus\Documents\cValidacao"
-# Arquivo de entrada para o teste
-entrada = r"entrada.txt"
-# Arquivo de saída para o resultado
-saida = r"saida.txt"
+    def load_test_cases(self):
+        """
+        Carrega as entradas e saídas esperadas a partir dos arquivos.
+        """
+        try:
+            with open(self.input_file, "r") as file:
+                inputs = file.read().strip().split("===")
+                self.inputs = [entry.strip() for entry in inputs]
+        except Exception as e:
+            print("❌ Erro ao ler arquivo de entradas:", str(e))
+            self.inputs = []
 
-# Teste com múltiplos casos de entrada
-resultados = validade_c(diretorio, entrada, saida)
-print(resultados)
+        try:
+            with open(self.output_file, "r") as file:
+                expected_outputs = file.read().strip().split("===")
+                self.expected_outputs = [output.strip() for output in expected_outputs]
+        except Exception as e:
+            print("❌ Erro ao ler arquivo de respostas:", str(e))
+            self.expected_outputs = []
+
+    def run_tests(self):
+        """
+        Executa o código C para cada entrada e compara com a saída esperada.
+        """
+        if len(self.inputs) != len(self.expected_outputs):
+            print(
+                "❌ Erro: O número de entradas não corresponde ao número de respostas esperadas."
+            )
+            return
+
+        for i, input_text in enumerate(self.inputs):
+            print(f"\n🛠️ Executando teste {i + 1} com entrada: {input_text}")
+
+            try:
+                execute_process = subprocess.run(
+                    [self.executable],
+                    input=input_text,
+                    text=True,
+                    capture_output=True,
+                )
+                output = execute_process.stdout.strip()
+                expected_output = self.expected_outputs[i]
+
+                print("🔹 Saída obtida:", output)
+
+                if output == expected_output:
+                    print("✅ Resultado correto!")
+                else:
+                    print("❌ Resultado incorreto!")
+                    print("   ➖ Esperado:", expected_output)
+                    print("   ➖ Obtido:", output)
+
+            except FileNotFoundError:
+                print(
+                    "❌ Erro: Arquivo do programa C não encontrado! Verifique o caminho do executável."
+                )
+                break
+            except Exception as e:
+                print("❌ Erro ao executar o programa C:", str(e))
