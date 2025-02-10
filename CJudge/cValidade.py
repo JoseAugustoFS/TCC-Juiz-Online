@@ -2,8 +2,14 @@ import os
 import subprocess
 
 
+import os
+import subprocess
+
+
 class cValidade:
-    def __init__(self, source_code, executable, input_file, output_file):
+    def __init__(
+        self, source_code, executable, input_file, output_file, output_log_file
+    ):
         """
         Inicializa a classe com os caminhos necessários.
 
@@ -11,16 +17,19 @@ class cValidade:
         :param executable: Caminho para o executável gerado após compilação.
         :param input_file: Caminho para o arquivo contendo as entradas.
         :param output_file: Caminho para o arquivo contendo as saídas esperadas.
+        :param output_log_file: Caminho para o arquivo de log de saída da compilação.
         """
         self.source_code = source_code
         self.executable = executable
         self.input_file = input_file
         self.output_file = output_file
+        self.output_log_file = output_log_file  # Novo parâmetro
         self.system = os.name  # Identifica o sistema operacional
 
     def compile(self):
         """
         Compila o código C e verifica se há erros de compilação.
+        A saída é gravada no arquivo de log.
         """
         compile_process = subprocess.run(
             ["gcc", self.source_code, "-o", self.executable],
@@ -28,12 +37,16 @@ class cValidade:
             text=True,
         )
 
-        if compile_process.returncode != 0:
-            print("❌ Erro na compilação do código C:\n", compile_process.stderr)
-            return False
+        with open(self.output_log_file, "w") as log_file:
+            if compile_process.returncode != 0:
+                log_file.write("❌ Erro na compilação do código C:\n")
+                log_file.write(compile_process.stderr)
+                return False
 
-        print("✅ Compilação bem-sucedida.")
+            log_file.write("✅ Compilação bem-sucedida.")
         return True
+
+    # O restante da classe permanece o mesmo...
 
     def load_test_cases(self):
         """
