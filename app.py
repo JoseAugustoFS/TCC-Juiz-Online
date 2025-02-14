@@ -5,79 +5,59 @@ from CJudge.cValidade import cValidade
 from CJudge.CAnalyzer import CAnalyzer
 from CJudge.COptimize import optimize_c
 
-system = os.name  # Identifica se é Windows ou Linux/macOS
+system = os.name
 
 if __name__ == "__main__":
 
-    language = "C"  # Alterar para "JAVA" para rodar código Java
+    language = "JAVA" 
 
-    if language == "JAVA":
+    if(language=="JAVA"):
         java_directory = "./javaCodes"
         java_io_directory = "./javaIO"
         statement = "Faça uma classe calculadora que consiga somar e subtrair."
 
         try:
-            with open(
-                os.path.join(java_io_directory, "entradas.txt"), "r"
-            ) as input_file:
-                input_data = input_file.read()
-            with open(
-                os.path.join(java_io_directory, "resposta.txt"), "r", encoding="utf-8"
-            ) as answer_file:
-                answer_data = answer_file.read()
+            with open(os.path.join(java_io_directory, "entradas.txt"), "r") as input_file:
+                input = input_file.read()
+            with open(os.path.join(java_io_directory, "resposta.txt"), "r", encoding="utf-8") as answer_file:
+                answer = answer_file.read()
         except Exception as e:
-            print("Erro ao ler arquivos de entrada/saída: " + str(e))
+            print("Error: " + str(e))
 
-        inputs = input_data.split("===")
-        answers = answer_data.split("===")
+        inputs = input.split("===")
+        answers = answer.split("===")
         answers = [item.strip() for item in answers]
-        answers.pop(0)  # Remove possível entrada vazia no início
+        answers.pop(0)
 
         result = judge(java_directory, inputs, answers, statement)
 
         print(result["compilation"])
         print(result["validated_percent"])
-        if result["validated_percent"] == 100.0:
+        if (result["validated_percent"] == 100.0):
             print(result["evalutation"])
             print(result["optimization"])
 
+
             response = "############\nValidação\n############\n"
             for index, evalutation_result in enumerate(result["evalutation_result"]):
-                response += (
-                    "Teste "
-                    + str(index + 1)
-                    + ":\n"
-                    + evalutation_result
-                    + "\n======================================\n"
-                )
-            response += "############\nOtimização\n############\n"
+                response += "Teste "+str(index+1)+":\n"+evalutation_result+"\n======================================\n"
+            response +="############\nOtimização\n############\n"
             for index, optimization_result in enumerate(result["optimization_result"]):
-                response += (
-                    "Teste "
-                    + str(index + 1)
-                    + ":\n"
-                    + optimization_result
-                    + "\n======================================\n"
-                )
+                response += "Teste "+str(index+1)+":\n"+optimization_result+"\n======================================\n"
 
-            decodeType = "unicode_escape" if system == "nt" else "utf-8"
+            if system == "nt":  # Windows
+                    decodeType = "unicode_escape"
+            else: #Linux ou macOS (ou qualquer outro)
+                decodeType = "utf-8"
             try:
-                with open(
-                    os.path.join(java_io_directory, "saida.txt"), "w", encoding="utf-8"
-                ) as output_file:
-                    output_file.write(
-                        str("===\n" + "\n===\n".join(result["validation_result"]))
-                        .encode("utf-8")
-                        .decode(decodeType)
-                    )
-                with open(
-                    os.path.join(java_io_directory, "avaliacao.txt"),
-                    "w",
-                    encoding="utf-8",
-                ) as response_file:
-                    response_file.write(response.encode("utf-8").decode(decodeType))
+                with open(os.path.join(java_io_directory, "saida.txt"), "a") as output_file:
+                    output_file.truncate(0)
+                    output_file.write(str("===\n"+"\n===\n".join(result["validation_result"])).encode("utf-8").decode(decodeType))
+                with open(os.path.join(java_io_directory, "avaliacao.txt"), "a") as response_file:
+                    response_file.truncate(0)
+                    response_file.write(response.encode('utf-8').decode(decodeType))
             except Exception as e:
-                print("Erro ao escrever arquivos de saída:", str(e))
+                print("Error: " + str(e))
 
     elif language == "C":
         c_io_directory = "./cIO"
