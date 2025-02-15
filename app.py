@@ -45,19 +45,20 @@ if __name__ == "__main__":
             for index, optimization_result in enumerate(result["optimization_result"]):
                 response += "Teste "+str(index+1)+":\n"+optimization_result+"\n======================================\n"
 
-            if system == "nt":  # Windows
-                    decodeType = "unicode_escape"
-            else: #Linux ou macOS (ou qualquer outro)
-                decodeType = "utf-8"
-            try:
-                with open(os.path.join(java_io_directory, "saida.txt"), "a") as output_file:
-                    output_file.truncate(0)
-                    output_file.write(str("===\n"+"\n===\n".join(result["validation_result"])).encode("utf-8").decode(decodeType))
+        if system == "nt":  # Windows
+                decodeType = "unicode_escape"
+        else: #Linux ou macOS (ou qualquer outro)
+            decodeType = "utf-8"
+        try:
+            with open(os.path.join(java_io_directory, "saida.txt"), "a") as output_file:
+                output_file.truncate(0)
+                output_file.write(str("===\n"+"\n===\n".join(result["validation_result"])).encode("utf-8").decode(decodeType))
+            if (result["validated_percent"] == 100.0):
                 with open(os.path.join(java_io_directory, "avaliacao.txt"), "a") as response_file:
                     response_file.truncate(0)
                     response_file.write(response.encode('utf-8').decode(decodeType))
-            except Exception as e:
-                print("Error: " + str(e))
+        except Exception as e:
+            print("Error: " + str(e))
 
     elif language == "C":
         c_io_directory = "./cIO"
