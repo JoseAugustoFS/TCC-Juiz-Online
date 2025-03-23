@@ -18,7 +18,7 @@ class CAnalyzer:
 
     def load_prompts(self):
         prompts = []
-        for i in range(1, 8):  # Ajuste o número 8 conforme necessário
+        for i in range(1, 8):
             file_path = os.path.join(self.prompt_directory, f"{i}.txt")
 
             if not os.path.isfile(file_path):
@@ -51,7 +51,7 @@ class CAnalyzer:
             return {"message": "An error occurred: " + str(e), "result": ""}
 
     def compile_and_run(self):
-        # Compilar o código C
+
         compile_command = (
             f"gcc {self.source_code} -o {self.source_code.replace('.c', '.exe')}"
         )
@@ -63,7 +63,6 @@ class CAnalyzer:
         if process.returncode != 0:
             return {"message": "Compilation failed", "result": stderr.decode("utf-8")}
 
-        # Executar o código C compilado
         executable = (
             self.source_code.replace(".c", ".exe")
             if os.name == "nt"
