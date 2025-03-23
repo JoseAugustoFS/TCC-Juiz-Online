@@ -18,9 +18,9 @@ def comment_package_line(file_path):
                 else:
                     file.write(line)
         
-        return "Package line commented successfully."
+        return "Linhas de pacotes comentadas com sucesso."
     except Exception as e:
-        return "An error occurred while commenting package line: " + str(e)
+        return "Um erro ocorreu enquanto a linha de pacotes era comentada: " + str(e)
 
 def compile_java(directory):
     try:
@@ -31,14 +31,14 @@ def compile_java(directory):
                     java_files.append(os.path.join(root, file))
         
         if java_files:
-            # Compilar
+
             result = subprocess.run(['javac'] + java_files, capture_output=True, text=True)
             
             if result.returncode == 0:
-                return {"status": True, "message": "Compilation successful."}
+                return {"status": True, "message": "Compilação bem-sucedida."}
             else:
-                return {"status": False, "message": "Compilation failed." + result.stderr}
+                return {"status": False, "message": "Erro na compilação." + result.stderr}
         else:
-            return {"status": False, "message": "No Java files found to compile."}
+            return {"status": False, "message": "Nenhum arquivo Java encontrado para compilar."}
     except Exception as e:
-        return {"status": False, "message": "An error occurred: " + str(e)}
+        return {"status": False, "message": "Um erro ocorreu: " + str(e)}
