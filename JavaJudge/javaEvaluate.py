@@ -3,14 +3,12 @@ from IA_Agent import agent_call
 
 def load_prompts(directory='PROMPTS/Evaluation'):
     prompts = []
-    for i in range(1, 8):  # Ajuste o número 8 se o número de arquivos for diferente
+    for i in range(1, 8):
         file_path = os.path.join(directory, f"{i}.txt")
         
-        # Verifica se o arquivo existe antes de tentar abrir
         if not os.path.isfile(file_path):
             raise FileNotFoundError(f"O arquivo '{file_path}' não foi encontrado.")
         
-        # Lê o conteúdo do arquivo e adiciona na lista
         with open(file_path, 'r', encoding='utf-8') as file:
             prompts.append(file.read().strip())
     
@@ -38,11 +36,11 @@ def evaluate_java(directory):
     prompts = load_prompts()
 
     if isinstance(codes, Exception):
-        return {"message": "An error occurred: " + str(codes), "result": ""}
+        return {"message": "Um erro ocorreu: " + str(codes), "resultado": ""}
     try:
         result = []
         for prompt in prompts:
             result.append(agent_call(prompt + codes))
-        return {"message": "Code evaluate", "result": result}
+        return {"message": "Código analisado", "resultado": result}
     except Exception as e:
-            return {"message": "An error occurred: " + str(e), "result": ""}
+            return {"message": "Um erro ocorreu: " + str(e), "resultado": ""}

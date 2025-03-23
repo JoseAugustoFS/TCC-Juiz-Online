@@ -1,11 +1,6 @@
 import os
 import subprocess
 
-
-import os
-import subprocess
-
-
 class cValidade:
     def __init__(
         self, source_code, executable, input_file, output_file, output_log_file

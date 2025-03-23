@@ -39,16 +39,16 @@ class CAnalyzer:
     def analyze_code(self):
         code = self.get_c_code()
         if isinstance(code, Exception):
-            return {"message": "An error occurred: " + str(code), "result": ""}
+            return {"message": "Um erro ocorreu: " + str(code), "result": ""}
 
         prompts = self.load_prompts()
         try:
             result = []
             for prompt in prompts:
                 result.append(agent_call(prompt + code))
-            return {"message": "Code analyzed", "result": result}
+            return {"message": "Código analisado", "resultado": result}
         except Exception as e:
-            return {"message": "An error occurred: " + str(e), "result": ""}
+            return {"message": "Um erro ocorreu: " + str(e), "resultado": ""}
 
     def compile_and_run(self):
 
@@ -61,7 +61,7 @@ class CAnalyzer:
         stdout, stderr = process.communicate()
 
         if process.returncode != 0:
-            return {"message": "Compilation failed", "result": stderr.decode("utf-8")}
+            return {"message": "Compilação falhou", "resultado": stderr.decode("utf-8")}
 
         executable = (
             self.source_code.replace(".c", ".exe")
@@ -75,6 +75,6 @@ class CAnalyzer:
         stdout, stderr = process.communicate()
 
         if process.returncode != 0:
-            return {"message": "Execution failed", "result": stderr.decode("utf-8")}
+            return {"message": "Execução falhou", "resultado": stderr.decode("utf-8")}
 
-        return {"message": "Execution successful", "result": stdout.decode("utf-8")}
+        return {"message": "Execução bem-sucedida", "resultado": stdout.decode("utf-8")}
