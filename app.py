@@ -22,7 +22,7 @@ if __name__ == "__main__":
             with open(os.path.join(java_io_directory, "resposta.txt"), "r", encoding="utf-8") as answer_file:
                 answer = answer_file.read()
         except Exception as e:
-            print("Error: " + str(e))
+            print("Erro: " + str(e))
 
         inputs = input.split("===")
         answers = answer.split("===")
@@ -36,7 +36,6 @@ if __name__ == "__main__":
         if (result["validated_percent"] == 100.0):
             print(result["evalutation"])
             print(result["optimization"])
-
 
             response = "############\nValidação\n############\n"
             for index, evalutation_result in enumerate(result["evalutation_result"]):
@@ -62,7 +61,7 @@ if __name__ == "__main__":
 
     elif language == "C":
         c_io_directory = "./cIO"
-        # Verificação de entradas e saídas em C (continua com a classe cValidade)
+
         c_judge = cValidade(
             source_code="cCodes/programa.c",
             executable=(
@@ -90,7 +89,6 @@ if __name__ == "__main__":
         print(analysis_result["message"])
         print(analysis_result["result"])
 
-        # Verificando se a análise foi bem-sucedida e salvando o resultado no arquivo
         if analysis_result["message"] == "Code analyzed":
             response = "############\nAnálise do Código C\n############\n"
             for index, evalutation_result in enumerate(analysis_result["result"]):
@@ -113,14 +111,12 @@ if __name__ == "__main__":
             except Exception as e:
                 print("Erro ao escrever o resultado da análise:", str(e))
 
-        # Otimização do código C
         statement = "Faça uma função em C que some dois números e retorne o resultado."
         optimization_result = optimize_c("./cCodes", statement)
 
         print(optimization_result["message"])
         print(optimization_result["result"])
 
-        # Salvando o resultado da otimização em OtimizacaoCodigo.txt
         if optimization_result["message"] == "Code optimized":
             optimization_response = (
                 "############\nOtimização do Código C\n############\n"
