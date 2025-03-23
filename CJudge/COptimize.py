@@ -4,14 +4,12 @@ from IA_Agent import agent_call
 
 def load_prompts(directory="PROMPTS/Optimization"):
     prompts = []
-    for i in range(1, 4):  # Ajuste o número 3 se o número de arquivos for diferente
+    for i in range(1, 4):
         file_path = os.path.join(directory, f"{i}.txt")
 
-        # Verifica se o arquivo existe antes de tentar abrir
         if not os.path.isfile(file_path):
             raise FileNotFoundError(f"O arquivo '{file_path}' não foi encontrado.")
 
-        # Lê o conteúdo do arquivo e adiciona na lista
         with open(file_path, "r", encoding="utf-8") as file:
             prompts.append(file.read().strip())
 
@@ -36,7 +34,6 @@ def get_c_codes(directory):
 
 
 def optimize_c(directory, statement):
-    # Obtendo os códigos C do diretório especificado
     codes = get_c_codes(directory)
     prompts = load_prompts()
 
@@ -46,7 +43,6 @@ def optimize_c(directory, statement):
     try:
         result = []
         for prompt in prompts:
-            # Chamando a IA para otimizar o código
             result.append(agent_call(prompt + statement + codes))
 
         return {"message": "Code optimized", "result": result}
