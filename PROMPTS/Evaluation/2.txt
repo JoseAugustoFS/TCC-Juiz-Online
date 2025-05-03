@@ -1,3 +1,77 @@
-Com base em todos os códigos abaixo, tanto em Java quanto em C, e ignorando que seus pacotes estão comentados, confirme se o código faz uso de constantes e avalie se seu uso é realmente necessário.
+Analise todos os códigos fornecidos, tanto em Java quanto em C, ignorando pacotes comentados.
 
-Caso o código utilize constantes onde não é necessário, responda "Inválido" e explique por que o uso excessivo de constantes pode tornar o código menos flexível. Se o uso de constantes for apropriado e necessário, responda "Válido".
+Objetivo: Avaliar se o código faz uso de constantes de maneira apropriada, considerando os seguintes critérios:
+
+Uso adequado de constantes para valores fixos que não devem mudar ao longo da execução (como PI, limites, mensagens fixas).
+Evitar o uso excessivo ou desnecessário de constantes, especialmente quando os valores podem ser configuráveis ou dependem de lógica externa.
+Seguir as convenções de nomenclatura para constantes:
+Java: static final com nomes em **MAIÚSCULAS_SEPARADAS_POR_UNDERSCORE`.
+C: #define ou const para valores fixos, também em MAIÚSCULAS.
+Critérios de avaliação:
+
+Se o código utilizar constantes desnecessárias ou em excesso, retorne "Inválido" e explique como isso pode reduzir a flexibilidade do código.
+Se o uso de constantes for apropriado e necessário, retorne "Válido".
+Exemplo de código com uso inadequado de constantes (Inválido):
+
+Java:
+public class Calculo {
+    private static final int VALOR_PADRAO = 10; // Constante desnecessária
+    
+    public static void main(String[] args) {
+        int resultado = VALOR_PADRAO * 2; // Poderia ser apenas 10 diretamente
+        System.out.println(resultado);
+    }
+}
+Problemas:
+
+VALOR_PADRAO não representa um valor que precisa ser fixo, tornando o código menos flexível.
+#include <stdio.h>
+
+#define INCREMENTO 5 // Desnecessário, pois pode ser usado diretamente no código
+
+int main() {
+    int valor = 10 + INCREMENTO; // Poderia ser simplesmente 15
+    printf("%d", valor);
+    return 0;
+}
+
+Problemas:
+
+INCREMENTO não traz real benefício ao código, dificultando modificações futuras.
+Saída esperada para esses casos:
+
+Inválido: O código usa constantes desnecessárias, reduzindo a flexibilidade.
+
+Exemplo de código com uso adequado de constantes (Válido):
+
+Java:
+public class Geometria {
+    private static final double PI = 3.14159; // Constante essencial
+    
+    public static double calcularAreaCirculo(double raio) {
+        return PI * raio * raio;
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(calcularAreaCirculo(5));
+    }
+}
+
+C:
+#include <stdio.h>
+
+#define PI 3.14159 // Constante necessária
+
+double calcular_area_circulo(double raio) {
+    return PI * raio * raio;
+}
+
+int main() {
+    printf("%lf", calcular_area_circulo(5));
+    return 0;
+}
+Saída esperada para esses casos:
+Válido
+
+Agora, faça a análise do código fornecido e determine se ele é Válido ou Inválido.
+

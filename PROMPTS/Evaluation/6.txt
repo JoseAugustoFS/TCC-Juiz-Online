@@ -1,3 +1,73 @@
-Com base em todos os códigos abaixo, tanto em Java quanto em C, e ignorando que seus pacotes estão comentados, avalie a consistência da identação no código.
+Tarefa: Avalie a consistência da indentação no código fornecido, que pode estar escrito em Java ou C. Ignore pacotes comentados e outros detalhes irrelevantes para a indentação.
 
-Caso o código tenha erros de identação, como espaços ou tabulações inconsistentes, responda "Inválido" e explique como a identação correta facilita a leitura e organização do código. Se a identação estiver correta, responda "Válido".
+Objetivo da Avaliação:
+O código deve seguir boas práticas de indentação para garantir legibilidade e manutenibilidade. A análise deve considerar os seguintes critérios:
+
+1. Consistência de Espaços ou Tabulações:
+O código deve usar exclusivamente espaços ou tabulações para indentação.
+
+Não é permitido misturar ambos dentro do mesmo arquivo.
+
+Se uma linha começar com tabulação, todas as linhas seguintes devem manter esse padrão; o mesmo vale para espaços.
+
+2. Indentação de Blocos de Código:
+Estruturas de controle como if, else, for, while, bem como blocos de métodos e classes, devem ter seu conteúdo indentado um nível a mais do que a linha de abertura.
+
+3. Alinhamento das Chaves:
+A chave de abertura { deve estar na mesma linha da estrutura de controle ou método correspondente.
+
+A chave de fechamento } deve estar no mesmo nível de indentação da linha onde o bloco foi iniciado.
+
+4. Indentação Dentro de Blocos:
+Todas as linhas dentro de um mesmo bloco de código (como o corpo de um método ou estrutura de controle) devem estar com o mesmo nível de indentação.
+
+Critérios de Avaliação:
+Se o código estiver corretamente indentado, a resposta deve ser:
+"Válido"
+
+Se houver erros de indentação, a resposta deve ser:
+"Inválido" seguido de uma explicação detalhada contendo:
+
+O tipo de erro (ex.: uso misto de espaços e tabulações, desalinhamento de blocos, erro no fechamento das chaves).
+
+Onde o erro ocorre (quais linhas ou blocos apresentam inconsistências).
+
+Exemplo de Código com Indentação Incorreta (Inválido):
+Java:
+public void exemplo() {
+    int a = 1;
+      int b = 2;  // Erro: esta linha está mais indentada que a anterior
+}
+Erro: O segundo nível de indentação dentro do método não é consistente.
+
+Exemplo de Entrada com Erro de Indentação (Inválido):
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+            System.out.println("Digite o primeiro número:");  // Erro: indentação inconsistente
+        int num1 = scanner.nextInt();  // Correto
+        System.out.println("Digite o segundo número:");
+            int num2 = scanner.nextInt();  // Erro: indentação inconsistente
+        Calcularoda calcularoda = new Calcularoda(num1, num2);
+        System.out.println("Soma: " + calcularoda.soma());
+        System.out.println("Subtração: " + calcularoda.subtracao());
+    }
+}
+Saída Esperada:
+"Inválido: O código apresenta inconsistências na indentação. Algumas linhas estão mais ou menos indentadas do que deveriam, tornando o código difícil de ler e manter. Os erros ocorrem nas linhas 4 e 7, onde a indentação está desalinhada em relação ao restante do bloco."
+
+Exemplo de Entrada com Indentação Correta (Válido):
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Digite o primeiro número:");
+        int num1 = scanner.nextInt();
+        System.out.println("Digite o segundo número:");
+        int num2 = scanner.nextInt();
+        Calcularoda calcularoda = new Calcularoda(num1, num2);
+        System.out.println("Soma: " + calcularoda.soma());
+        System.out.println("Subtração: " + calcularoda.subtracao());
+    }
+}
+Saída Esperada:
+"Válido"

@@ -1,3 +1,59 @@
-Com base em todos os códigos abaixo, tanto em Java quanto em C, e ignorando que seus pacotes estão comentados, verifique se o código segue as boas práticas de formatação, como uso adequado de espaçamento, quebras de linha, alinhamento de código e comentários.
+Analise cuidadosamente todos os códigos fornecidos, tanto em Java quanto em C, desconsiderando quaisquer pacotes comentados.
 
-Caso o código tenha formatação inconsistente ou desleixada, responda "Inválido" e explique como a formatação correta melhora a legibilidade e manutenção do código. Se o código estiver bem formatado, responda "Válido".
+Objetivo: Verificar se o código segue boas práticas de formatação, incluindo:
+
+Uso adequado de espaçamentos entre operadores, palavras-chave e delimitadores.
+Quebras de linha consistentes para melhorar a leitura e evitar trechos longos e confusos.
+Alinhamento correto de blocos de código, como chaves {} e indentação adequada.
+Uso apropriado de comentários, garantindo que sejam claros e relevantes, sem excesso ou ausência total.
+Critérios de avaliação:
+
+Se o código apresentar formatação inconsistente ou desleixada, retorne "Inválido" e explique como a formatação correta melhora a legibilidade, a manutenção do código e a colaboração entre desenvolvedores.
+Se o código estiver bem formatado, organizado e seguindo as boas práticas, retorne "Válido".
+Exemplo de código com formatação inadequada (Inválido):
+
+Java:
+public class Teste{
+public static void main(String[]args){
+int x=10;System.out.println(x);}}
+Problemas:
+
+Falta de espaçamento adequado entre palavras-chave e parênteses.
+Código inteiro em uma única linha, prejudicando a leitura.
+Chaves {} desalinhadas.
+
+C:
+#include<stdio.h>
+int main(){int x=10;printf("%d",x);return 0;
+
+Problemas:
+
+#include sem espaçamento adequado.
+Todo o código está em uma única linha, dificultando a legibilidade.
+Saída esperada para esses casos:
+
+Inválido: O código apresenta formatação inconsistente, dificultando a leitura e manutenção.
+
+Exemplo de código bem formatado (Válido):
+
+Java:
+public class Teste {
+    public static void main(String[] args) {
+        int x = 10; // Variável inicializada corretamente
+        System.out.println(x); // Exibe o valor de x
+    }
+}
+
+C:
+#include <stdio.h>
+
+int main() {
+    int x = 10; // Variável inicializada corretamente
+    printf("%d", x); // Exibe o valor de x
+    return 0;
+}
+
+Saída esperada para esses casos:
+Válido
+
+Agora, faça a análise do código fornecido e determine se ele é Válido ou Inválido.

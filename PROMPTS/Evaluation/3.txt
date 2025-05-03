@@ -1,3 +1,81 @@
-Com base em todos os códigos abaixo, tanto em Java quanto em C, e ignorando que seus pacotes estão comentados, confirme se os nomes das variáveis, identificadores e classes (ou funções e estruturas, no caso de C) seguem as convenções de nomenclatura adequadas.
+Analise todos os códigos fornecidos, tanto em Java quanto em C, ignorando pacotes comentados.
 
-Caso os nomes sejam pouco claros, como nomes genéricos ou confusos, responda "Inválido" e explique como uma nomenclatura clara e descritiva é importante para a legibilidade do código. Se os nomes forem apropriados e seguirem as boas práticas, responda "Válido".
+Objetivo: Verificar se os nomes de variáveis, identificadores, classes, funções e estruturas seguem as boas práticas de nomenclatura, incluindo:
+
+Nomes descritivos e claros, evitando abreviações excessivas ou nomes genéricos como a, x1, data, temp.
+
+Uso adequado de convenções de nomenclatura, como:
+Java: CamelCase para classes (MinhaClasse), camelCase para variáveis/métodos (minhaVariavel).
+C: snake_case para variáveis/funções (minha_variavel), PascalCase para structs (MinhaEstrutura).
+
+Evitar uso de números ou caracteres especiais desnecessários (variavel1, __minhaFuncao).
+Critérios de avaliação:
+
+Se o código utilizar nomes genéricos, confusos ou não seguir as convenções apropriadas, retorne "Inválido" e explique como nomes claros e padronizados melhoram a legibilidade, manutenção e colaboração no código.
+Se todos os nomes forem apropriados e bem definidos, retorne "Válido".
+
+Exemplo de código com nomenclatura inadequada (Inválido):
+
+Java:
+public class t {
+    public static void main(String[] args) {
+        int v1 = 10; // Nome pouco descritivo
+        int v2 = 20; // Nome genérico
+        System.out.println(v1 + v2);
+    }
+}
+
+Problemas:
+
+Nome da classe t é genérico e não segue PascalCase.
+Variáveis v1 e v2 não indicam claramente seu propósito.
+
+C:
+#include <stdio.h>
+
+int f(int n) { // Nome da função não é descritivo
+    return n * 2;
+}
+
+int main() {
+    int x = 10; // Nome vago
+    printf("%d", f(x));
+    return 0;
+}
+
+Problemas:
+
+Nome da função f não indica seu propósito.
+Nome da variável x é muito genérico.
+Saída esperada para esses casos:
+Inválido: O código utiliza nomes genéricos e pouco descritivos, dificultando a compreensão e manutenção.
+
+Exemplo de código com nomenclatura adequada (Válido):
+
+Java:
+public class Calculadora {
+    public static void main(String[] args) {
+        int numeroA = 10;
+        int numeroB = 20;
+        int soma = numeroA + numeroB;
+        System.out.println(soma);
+    }
+}
+
+C:
+#include <stdio.h>
+
+int dobrar_valor(int numero) {
+    return numero * 2;
+}
+
+int main() {
+    int valor = 10;
+    printf("%d", dobrar_valor(valor));
+    return 0;
+}
+
+Saída esperada para esses casos:
+
+Válido
+Agora, faça a análise do código fornecido e determine se ele é Válido ou Inválido.

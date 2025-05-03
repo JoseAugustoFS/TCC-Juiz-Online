@@ -1,6 +1,83 @@
-O código pode ser em JAVA ou C.
+Tarefa: Avalie os códigos fornecidos, escritos em Java ou C, considerando o enunciado e verificando se o uso de tipos primitivos está otimizado. Ignore pacotes comentados e outros detalhes irrelevantes.
 
-Analisar se o tipo primitivo foi usado de maneira correta
+Objetivo da Avaliação:
+O código deve utilizar tipos primitivos corretamente para garantir eficiência e evitar alocações desnecessárias de memória. A análise deve levar em consideração o enunciado fornecido e verificar se os tipos primitivos foram utilizados de forma otimizada, conforme os seguintes critérios:
 
-Com base no enunciado abaixo e em todos os códigos (JAVA ou C) abaixo e ignorando que seus pacotes estão comentados, confirme se eles estão otimizados conforme especificamente o tópico abaixo, leve em conta se está tudo otimizado em relação ao que o enunciado pede, evitando coisas desnecessárias (caso sim informe apenas 'Otimizado', caso não informe 'Não otimizado' e na linha abaixo explique o porque está inválido): Enunciado:
+1. Uso Correto de Tipos Primitivos:
+O código deve escolher o tipo primitivo adequado para cada variável, evitando o uso de tipos mais amplos do que o necessário.
 
+Evite o uso de tipos de dados desnecessariamente grandes quando um tipo menor atender ao requisito do enunciado.
+
+Para variáveis que armazenam valores pequenos, prefira short ou char em vez de int, e float em vez de double, caso o enunciado não exija precisão adicional.
+
+2. Evitar Uso Desnecessário de Wrappers e Objetos:
+Em Java, não utilize classes wrapper (Integer, Double, Boolean, etc.) quando um tipo primitivo pode ser usado sem necessidade de conversões automáticas (autoboxing).
+
+Em C, não utilize estruturas complexas se um tipo primitivo simples puder ser empregado para alcançar o mesmo resultado de forma eficiente.
+
+3. Compatibilidade com o Enunciado:
+A otimização deve ser avaliada com base no que o enunciado exige. O código será considerado não otimizado se usar tipos inadequados para a tarefa especificada.
+
+Critérios de Avaliação:
+Se o código utilizar os tipos primitivos corretamente de acordo com o enunciado e sem excessos desnecessários, a resposta deve ser:
+"Otimizado"
+
+Se houver uso ineficiente de tipos primitivos, a resposta deve ser:
+"Não otimizado", seguido de uma explicação contendo:
+
+O motivo da não otimização (ex.: tipo excessivamente grande, uso desnecessário de wrappers, alocação ineficiente).
+
+Onde o erro ocorre (quais variáveis ou trechos do código estão incorretos).
+
+Exemplo de Código Não Otimizado (Java):
+
+public class Exemplo {
+    public static void main(String[] args) {
+        Integer numero = 100;  // Uso desnecessário da classe wrapper Integer
+        Double resultado = 10.5;  // Uso desnecessário de Double ao invés de float
+        System.out.println(numero + resultado);
+    }
+}
+Saída Esperada:
+
+Não otimizado  
+O código utiliza wrappers (`Integer` e `Double`) sem necessidade. Deve-se usar `int` e `float` para melhor desempenho.
+
+Exemplo de Código Otimizado (Java):
+
+public class Exemplo {
+    public static void main(String[] args) {
+        int numero = 100;  // Uso correto do tipo primitivo int
+        float resultado = 10.5f;  // Uso correto do tipo primitivo float
+        System.out.println(numero + resultado);
+    }
+}
+Saída Esperada:
+
+Otimizado
+
+Exemplo de Código Não Otimizado (C):
+
+#include <stdio.h>
+
+int main() {
+    double valor = 5.0;  // Uso de double desnecessário para valores pequenos
+    printf("Valor: %f", valor);
+    return 0;
+}
+Saída Esperada:
+
+Não otimizado  
+O código usa `double` sem necessidade. Para valores pequenos, `float` seria mais eficiente.
+
+Exemplo de Código Otimizado (C):
+
+#include <stdio.h>
+
+int main() {
+    float valor = 5.0f;  // Uso correto de float para otimizar memória
+    printf("Valor: %f", valor);
+    return 0;
+}
+Saída Esperada:
+Otimizado

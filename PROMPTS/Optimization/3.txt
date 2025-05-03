@@ -1,6 +1,94 @@
-O código pode ser em JAVA ou C.
+Tarefa: Avalie os códigos fornecidos, escritos em Java ou C, considerando o enunciado e verificando se o uso de estruturas de repetição está otimizado. Ignore pacotes comentados e outros detalhes irrelevantes.
 
-Otimizar uso das estruturas de repetição, apenas se houver necessidade usar
+Objetivo da Avaliação:
+O código deve utilizar estruturas de repetição (for, while, do-while) de maneira eficiente, evitando iterações desnecessárias e garantindo um fluxo de execução otimizado. A análise deve levar em consideração o enunciado fornecido e verificar se os laços foram empregados corretamente, conforme os seguintes critérios:
 
-Com base no enunciado abaixo e em todos os códigos (JAVA ou C) abaixo e ignorando que seus pacotes estão comentados, confirme se eles estão otimizados conforme especificamente o tópico abaixo, leve em conta se está tudo otimizado em relação ao que o enunciado pede, evitando coisas desnecessárias (caso sim informe apenas 'Otimizado', caso não informe 'Não otimizado' e na linha abaixo explique o porque está inválido): Enunciado:
+1. Uso Necessário das Estruturas de Repetição:
+Os laços devem ser utilizados somente quando necessário.
 
+Se um loop percorre um conjunto fixo de valores e poderia ser substituído por uma abordagem mais direta, ele pode ser considerado desnecessário.
+
+2. Evitar Laços Redundantes ou Ineficientes:
+Não utilizar loops para executar tarefas que poderiam ser feitas de maneira mais eficiente sem repetição.
+
+Evitar iterações desnecessárias quando uma solução direta puder ser empregada.
+
+Evitar laços aninhados excessivos quando um único laço pode resolver o problema de forma eficiente.
+
+3. Escolha Apropriada da Estrutura de Repetição:
+Utilizar for quando o número de iterações for conhecido previamente.
+
+Utilizar while quando a condição de parada depender de um evento externo ou de entrada do usuário.
+
+Utilizar do-while apenas quando for necessário garantir que o bloco de código execute pelo menos uma vez.
+
+Critérios de Avaliação:
+Se o código utilizar as estruturas de repetição corretamente e sem execuções desnecessárias, a resposta deve ser:
+"Otimizado"
+
+Se houver laços desnecessários ou uso ineficiente das estruturas de repetição, a resposta deve ser:
+"Não otimizado", seguido de uma explicação contendo:
+
+O motivo da não otimização (ex.: loop redundante, iteração desnecessária, estrutura inadequada).
+
+Onde o erro ocorre (quais trechos do código apresentam problemas).
+
+Exemplo de Código Não Otimizado (Java):
+
+public class Exemplo {
+    public static void main(String[] args) {
+        int[] numeros = {1, 2, 3, 4, 5};
+        for (int i = 0; i < numeros.length; i++) {
+            System.out.println(numeros[i]);
+        }
+    }
+}
+Saída Esperada:
+
+Não otimizado  
+O loop `for` pode ser substituído por um `for-each`, que é mais eficiente para percorrer arrays em Java.
+
+Exemplo de Código Otimizado (Java):
+
+public class Exemplo {
+    public static void main(String[] args) {
+        int[] numeros = {1, 2, 3, 4, 5};
+        for (int numero : numeros) {
+            System.out.println(numero);
+        }
+    }
+}
+Saída Esperada:
+
+Otimizado
+
+Exemplo de Código Não Otimizado (C):
+
+#include <stdio.h>
+
+int main() {
+    int i = 0;
+    while (i < 5) {
+        printf("%d\n", i);
+        i++;
+    }
+    return 0;
+}
+Saída Esperada:
+
+Não otimizado  
+O `while` pode ser substituído por um `for`, que é mais adequado para uma iteração de contagem fixa.
+
+Exemplo de Código Otimizado (C):
+
+#include <stdio.h>
+
+int main() {
+    for (int i = 0; i < 5; i++) {
+        printf("%d\n", i);
+    }
+    return 0;
+}
+Saída Esperada:
+
+Otimizado

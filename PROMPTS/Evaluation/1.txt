@@ -1,3 +1,98 @@
-Com base em todos os códigos abaixo, tanto em Java quanto em C, e ignorando que seus pacotes estão comentados, confirme se o código segue as boas práticas de programação, especificamente em relação ao uso de variáveis globais.
+Tarefa: Analise todos os códigos fornecidos, tanto em Java quanto em C, ignorando pacotes comentados.
 
-Caso o código utilize variáveis globais, responda "Inválido" e explique por que o uso de variáveis globais é prejudicial, como o aumento da complexidade e o risco de manipulação indesejada dos dados. Se o código não usar variáveis globais, responda "Válido".
+Objetivo: Avaliar se o código segue boas práticas em relação ao uso de variáveis globais, considerando os seguintes critérios:
+
+Evitar o uso de variáveis globais para armazenar informações que podem ser passadas como parâmetros ou encapsuladas em classes ou funções.
+Verificar se há alternativas melhores, como variáveis locais, atributos de instância ou estruturas adequadas.
+Entender o impacto de variáveis globais, incluindo:
+Aumento da complexidade (dificultando o rastreamento de alterações).
+Maior risco de efeitos colaterais (funções modificando dados inesperadamente).
+Redução da modularidade e dificuldade na reutilização do código.
+Critérios de avaliação:
+
+Se o código utilizar variáveis globais, retorne "Inválido" e explique como isso pode comprometer a manutenibilidade do código.
+Se o código não utilizar variáveis globais, retorne "Válido".
+
+Exemplo de código com uso inadequado de variáveis globais (Inválido):
+
+Java:
+public class ContadorGlobal {
+    static int contador = 0; // Variável global desnecessária
+    
+    public static void incrementar() {
+        contador++;
+    }
+    
+    public static void main(String[] args) {
+        incrementar();
+        incrementar();
+        System.out.println("Contador: " + contador);
+    }
+}
+Problemas:
+
+contador é uma variável global (static), podendo ser modificada por qualquer parte do código, tornando o comportamento imprevisível.
+C:
+#include <stdio.h>
+
+int contador = 0; // Variável global
+
+void incrementar() {
+    contador++;
+}
+
+int main() {
+    incrementar();
+    incrementar();
+    printf("Contador: %d", contador);
+    return 0;
+}
+Problemas:
+
+contador é global, aumentando o risco de modificações inesperadas por outras funções.
+Saída esperada para esses casos:
+Inválido: O código usa variáveis globais, o que pode comprometer modularidade e previsibilidade.
+
+Exemplo de código com uso adequado de variáveis (Válido):
+
+Java:
+public class Contador {
+    private int contador = 0; // Variável encapsulada
+    
+    public void incrementar() {
+        contador++;
+    }
+    
+    public int getContador() {
+        return contador;
+    }
+    
+    public static void main(String[] args) {
+        Contador c = new Contador();
+        c.incrementar();
+        c.incrementar();
+        System.out.println("Contador: " + c.getContador());
+    }
+}
+C:
+#include <stdio.h>
+
+typedef struct {
+    int contador;
+} Contador;
+
+void incrementar(Contador *c) {
+    c->contador++;
+}
+
+int main() {
+    Contador c = {0}; // Variável encapsulada dentro de uma estrutura
+    incrementar(&c);
+    incrementar(&c);
+    printf("Contador: %d", c.contador);
+    return 0;
+}
+Saída esperada para esses casos:
+Válido
+
+Agora, faça a análise do código fornecido e determine se ele é Válido ou Inválido.

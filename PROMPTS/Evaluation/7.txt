@@ -1,3 +1,68 @@
-Com base em todos os códigos abaixo, tanto em Java quanto em C, e ignorando que seus pacotes estão comentados, verifique se há identificadores não utilizados no código, como variáveis, funções ou estruturas que são declaradas mas nunca utilizadas.
+Tarefa: Avalie o código fornecido, escrito em Java ou C, e identifique se há variáveis, funções ou importações que são declaradas mas nunca utilizadas. O código só será considerado válido se não houver identificadores não utilizados.
 
-Caso identifique identificadores não utilizados, responda "Inválido" e explique como a remoção de código não utilizado pode melhorar a performance e clareza do código. Se não houver identificadores não utilizados, responda "Válido".
+Objetivo da Avaliação:
+O código deve seguir boas práticas de otimização e organização, evitando declarações desnecessárias. A análise deve considerar os seguintes critérios:
+
+1. Variáveis Não Utilizadas:
+Uma variável é considerada não utilizada se for declarada mas nunca acessada ou modificada.
+
+Isso inclui variáveis dentro de métodos, variáveis globais e variáveis de instância em classes que não são referenciadas em nenhuma parte do código.
+
+2. Funções ou Métodos Não Utilizados:
+Se uma função ou método for declarado mas nunca chamado, ele deve ser identificado como não utilizado.
+
+Métodos que não possuem chamadas diretas ou indiretas dentro do código serão considerados redundantes.
+
+3. Importações Não Utilizadas:
+Se um pacote ou biblioteca for importado mas nunca utilizado dentro do código, isso deve ser identificado como um erro.
+
+Importações desnecessárias aumentam a complexidade do código e devem ser evitadas.
+
+Critérios de Avaliação:
+Se o código não contiver identificadores não utilizados, a resposta deve ser:
+"Válido"
+
+Se houver identificadores não utilizados, a resposta deve ser:
+"Inválido", seguido de uma explicação detalhada contendo:
+
+O identificador não utilizado (variável, função, método ou importação).
+
+Onde o identificador não utilizado está localizado no código (linha ou bloco específico).
+
+Exemplo de Código com Identificadores Não Utilizados (Inválido):
+Java:
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        int a = 0;  // Variável não utilizada
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Digite o primeiro número:");
+        int num1 = scanner.nextInt();
+        System.out.println("Digite o segundo número:");
+        int num2 = scanner.nextInt();
+        Calcularoda calcularoda = new Calcularoda(num1, num2);
+        System.out.println("Soma: " + calcularoda.soma());
+        System.out.println("Subtração: " + calcularoda.subtracao());
+    }
+}
+Saída Esperada:
+"Inválido. O código contém identificadores não utilizados: A variável 'a' é declarada mas nunca usada no código."
+
+Exemplo de Código sem Identificadores Não Utilizados (Válido):
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Digite o primeiro número:");
+        int num1 = scanner.nextInt();
+        System.out.println("Digite o segundo número:");
+        int num2 = scanner.nextInt();
+        Calcularoda calcularoda = new Calcularoda(num1, num2);
+        System.out.println("Soma: " + calcularoda.soma());
+        System.out.println("Subtração: " + calcularoda.subtracao());
+    }
+}
+Saída Esperada:
+"Válido"

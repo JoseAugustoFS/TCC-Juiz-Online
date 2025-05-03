@@ -1,6 +1,113 @@
-O código pode ser em JAVA ou C.
+Tarefa: Avalie os códigos fornecidos, escritos em Java ou C, considerando o enunciado e verificando se o uso de estruturas de seleção está otimizado. Ignore pacotes comentados e outros detalhes irrelevantes.
 
-Otimizar uso das estruturas de seleção, apenas se houver necessidade usar
+Objetivo da Avaliação:
+O código deve utilizar estruturas de seleção (if, else if, else, switch) de forma eficiente, evitando verificações desnecessárias e garantindo um fluxo de controle otimizado. A análise deve levar em consideração o enunciado fornecido e verificar se as estruturas de seleção foram usadas de maneira apropriada, conforme os seguintes critérios:
 
-Com base no enunciado abaixo e em todos os códigos (JAVA ou C) abaixo e ignorando que seus pacotes estão comentados, confirme se eles estão otimizados conforme especificamente o tópico abaixo, leve em conta se está tudo otimizado em relação ao que o enunciado pede, evitando coisas desnecessárias (caso sim informe apenas 'Otimizado', caso não informe 'Não otimizado' e na linha abaixo explique o porque está inválido): Enunciado:
+1. Uso Necessário das Estruturas de Seleção:
+As estruturas de seleção devem ser utilizadas apenas quando realmente necessárias.
 
+Evitar verificações redundantes ou que poderiam ser substituídas por abordagens mais diretas.
+
+Se uma condição for sempre verdadeira ou falsa, a estrutura de seleção pode ser desnecessária.
+
+2. Simplificação de Condições:
+Se múltiplas verificações if-else puderem ser substituídas por um switch mais eficiente, essa mudança deve ser considerada.
+
+Condições booleanas desnecessárias devem ser removidas (exemplo: if (flag == true) pode ser apenas if (flag)).
+
+3. Estruturas Aninhadas de Forma Ineficiente:
+Evitar aninhamentos excessivos de if dentro de if quando uma abordagem mais direta pode ser aplicada.
+
+Substituir retornos múltiplos por uma estrutura de controle mais limpa, se possível.
+
+Critérios de Avaliação:
+Se o código utilizar as estruturas de seleção de forma otimizada e sem verificações desnecessárias, a resposta deve ser:
+"Otimizado"
+
+Se houver uso ineficiente ou desnecessário de estruturas de seleção, a resposta deve ser:
+"Não otimizado", seguido de uma explicação contendo:
+
+O motivo da não otimização (ex.: verificações redundantes, aninhamentos desnecessários, condições irrelevantes).
+
+Onde o erro ocorre (quais trechos do código apresentam problemas).
+
+Exemplo de Código Não Otimizado (Java):
+
+public class Exemplo {
+    public static void main(String[] args) {
+        int numero = 10;
+        if (numero > 0) {  
+            if (numero > 5) {  
+                if (numero > 8) {  
+                    System.out.println("Número maior que 8");  
+                }  
+            }  
+        }  
+    }
+}
+Saída Esperada:
+
+Não otimizado  
+O código possui verificações aninhadas desnecessárias. Poderia ser simplificado para `if (numero > 8)`.
+
+Exemplo de Código Otimizado (Java):
+
+public class Exemplo {
+    public static void main(String[] args) {
+        int numero = 10;
+        if (numero > 8) {  
+            System.out.println("Número maior que 8");  
+        }  
+    }
+}
+Saída Esperada:
+
+Otimizado
+
+Exemplo de Código Não Otimizado (C):
+
+#include <stdio.h>
+
+int main() {
+    int opcao = 2;
+    if (opcao == 1) {
+        printf("Opção 1 escolhida\n");
+    } else if (opcao == 2) {
+        printf("Opção 2 escolhida\n");
+    } else if (opcao == 3) {
+        printf("Opção 3 escolhida\n");
+    } else {
+        printf("Opção inválida\n");
+    }
+    return 0;
+}
+Saída Esperada:
+
+Não otimizado  
+O código pode usar `switch` no lugar de múltiplos `if-else`, tornando a execução mais eficiente.
+
+Exemplo de Código Otimizado (C):
+
+#include <stdio.h>
+
+int main() {
+    int opcao = 2;
+    switch (opcao) {
+        case 1:
+            printf("Opção 1 escolhida\n");
+            break;
+        case 2:
+            printf("Opção 2 escolhida\n");
+            break;
+        case 3:
+            printf("Opção 3 escolhida\n");
+            break;
+        default:
+            printf("Opção inválida\n");
+            break;
+    }
+    return 0;
+}
+Saída Esperada:
+
+Otimizado
