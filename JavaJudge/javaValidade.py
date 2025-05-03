@@ -25,14 +25,16 @@ def run_java(directory, input_data):
             if result.returncode == 0:
                 return result.stdout.strip()
             else:
-                return f"Execução falhou: {result.stderr.strip()}"
+                return f"Execution failed: {result.stderr.strip()}"
         else:
-            return "Nenhuma classe Java encontrada para executar."
+            return "No compiled Java class found to execute."
     except Exception as e:
-        return f"Um erro ocorreu durante a execução: {str(e)}"
+        return f"An error occurred during execution: {str(e)}"
     
 def validade_java(directory, inputs, answers):
     try:
+        if((len(answers))==0):
+            return {"validated_percent": 100, "result": "No answers provided."}
         results = []
         for i, single_input in enumerate(inputs):
             result = run_java(directory, single_input.strip())
@@ -41,7 +43,7 @@ def validade_java(directory, inputs, answers):
         correct_count = sum(1 for o, a in zip(results, answers) if o == a)
         validated_percent = correct_count / len(answers) * 100
 
-        return {"percentual_validado": validated_percent, "resultado": results}
+        return {"validated_percent": validated_percent, "result": results}
 
     except Exception as e:
-        return {"percentual_validado": 0, "resultado": "Um erro ocorreu durante a validação: " + str(e)}
+        return {"validated_percent": 0, "result": "An error occurred during validation: " + str(e)}

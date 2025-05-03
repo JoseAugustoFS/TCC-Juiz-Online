@@ -36,11 +36,11 @@ def evaluate_java(directory):
     prompts = load_prompts()
 
     if isinstance(codes, Exception):
-        return {"message": "Um erro ocorreu: " + str(codes), "resultado": ""}
+        return {"message": "An error occurred: " + str(codes), "result": ""}
     try:
         result = []
         for prompt in prompts:
             result.append(agent_call(prompt + codes))
-        return {"message": "Código analisado", "resultado": result}
+        return {"message": "Code evaluate", "result": result}
     except Exception as e:
-            return {"message": "Um erro ocorreu: " + str(e), "resultado": ""}
+            return {"message": "An error occurred: " + str(e), "result": ""}
