@@ -38,13 +38,13 @@ def optimize_c(directory, statement):
     prompts = load_prompts()
 
     if isinstance(codes, Exception):
-        return {"message": "Um erro ocorreu: " + str(codes), "resultado": ""}
+        return {"message": "An error occurred: " + str(codes), "result": ""}
 
     try:
         result = []
         for prompt in prompts:
             result.append(agent_call(prompt + statement + codes))
 
-        return {"message": "Código otimizado", "resultado": result}
+        return {"message": "Code optimized", "result": result}
     except Exception as e:
-        return {"message": "Um erro ocorreu: " + str(e), "resultado": ""}
+        return {"message": "An error occurred: " + str(e), "result": ""}

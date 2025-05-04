@@ -5,7 +5,7 @@ class cValidade:
     def __init__(
         self, source_code, executable, input_file, output_file, output_log_file
     ):
-
+ 
         self.source_code = source_code
         self.executable = executable
         self.input_file = input_file
@@ -14,7 +14,10 @@ class cValidade:
         self.system = os.name
 
     def compile(self):
-
+        """
+        Compila o código C e verifica se há erros de compilação.
+        A saída é gravada no arquivo de log.
+        """
         compile_process = subprocess.run(
             ["gcc", self.source_code, "-o", self.executable],
             capture_output=True,
@@ -31,6 +34,7 @@ class cValidade:
         return True
 
     def load_test_cases(self):
+ 
         try:
             with open(self.input_file, "r") as file:
                 inputs = file.read().strip().split("===")
@@ -48,7 +52,9 @@ class cValidade:
             self.expected_outputs = []
 
     def run_tests(self):
-
+        """
+        Executa o código C para cada entrada e compara com a saída esperada.
+        """
         if len(self.inputs) != len(self.expected_outputs):
             print(
                 "Erro: O número de entradas não corresponde ao número de respostas esperadas."
@@ -74,8 +80,8 @@ class cValidade:
                     print(" Resultado correto!")
                 else:
                     print(" Resultado incorreto!")
-                    print(" Esperado:", expected_output)
-                    print(" Obtido:", output)
+                    print("    Esperado:", expected_output)
+                    print("    Obtido:", output)
 
             except FileNotFoundError:
                 print(

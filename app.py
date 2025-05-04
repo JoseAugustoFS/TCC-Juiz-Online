@@ -9,7 +9,7 @@ system = os.name
 
 if __name__ == "__main__":
 
-    language = "JAVA" 
+    language = "C" 
 
     if(language=="JAVA"):
         java_directory = "./javaCodes"
@@ -61,7 +61,7 @@ if __name__ == "__main__":
 
     elif language == "C":
         c_io_directory = "./cIO"
-
+        # Verificação de entradas e saídas em C (continua com a classe cValidade)
         c_judge = cValidade(
             source_code="cCodes/programa.c",
             executable=(
@@ -89,6 +89,7 @@ if __name__ == "__main__":
         print(analysis_result["message"])
         print(analysis_result["result"])
 
+        # Verificando se a análise foi bem-sucedida e salvando o resultado no arquivo
         if analysis_result["message"] == "Code analyzed":
             response = "############\nAnálise do Código C\n############\n"
             for index, evalutation_result in enumerate(analysis_result["result"]):
@@ -111,12 +112,14 @@ if __name__ == "__main__":
             except Exception as e:
                 print("Erro ao escrever o resultado da análise:", str(e))
 
-        statement = "Faça uma função em C que some dois números e retorne o resultado."
+        # Otimização do código C
+        statement = "Desenvolva um programa que solicite ao usuário que insira um ano no formato de quatro dígitos (ex: 2024) e determine se esse ano é ou não bissexto."
         optimization_result = optimize_c("./cCodes", statement)
 
         print(optimization_result["message"])
         print(optimization_result["result"])
 
+        # Salvando o resultado da otimização em OtimizacaoCodigo.txt
         if optimization_result["message"] == "Code optimized":
             optimization_response = (
                 "############\nOtimização do Código C\n############\n"
@@ -135,3 +138,4 @@ if __name__ == "__main__":
                 print("Erro ao escrever o resultado da otimização:", str(e))
     else:
         print("Linguagem inválida.")
+        
