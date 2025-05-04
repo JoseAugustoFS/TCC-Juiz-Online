@@ -87,12 +87,12 @@ if __name__ == "__main__":
         analysis_result = c_analyzer.analyze_code()
 
         print(analysis_result["message"])
-        print(analysis_result["result"])
+        print(analysis_result["resultado"])
 
         # Verificando se a análise foi bem-sucedida e salvando o resultado no arquivo
         if analysis_result["message"] == "Code analyzed":
             response = "############\nAnálise do Código C\n############\n"
-            for index, evalutation_result in enumerate(analysis_result["result"]):
+            for index, evalutation_result in enumerate(analysis_result["resultado"]):
                 response += (
                     "Teste "
                     + str(index + 1)
@@ -112,19 +112,23 @@ if __name__ == "__main__":
             except Exception as e:
                 print("Erro ao escrever o resultado da análise:", str(e))
 
+<<<<<<< HEAD
         # Otimização do código C
         statement = "Desenvolva um programa que solicite ao usuário que insira um ano no formato de quatro dígitos (ex: 2024) e determine se esse ano é ou não bissexto."
+=======
+        statement = "Desenvolva um programa que solicite ao usuário que insira um ano no formato de quatro dígitos (ex: 2024) e determine se esse ano é ou não bissexto. O objetivo deste exercício é praticar a aplicação de condições compostas com operadores lógicos e relacionais.Um ano é bissexto se ele satisfaz as seguintes condições: É divisível por 4, mas não por 100, ou É divisível por 400. Ou seja: 2000 → bissexto (divisível por 400) 1900 → não é bissexto (divisível por 100, mas não por 400) 2024 → bissexto (divisível por 4, mas não por 100) Requisitos: O usuário deve inserir um número de 4 dígitos. O programa deve verificar se o valor tem exatamente quatro dígitos, e caso contrário, exibir uma mensagem de erro. Em seguida, o programa deve determinar se o ano é bissexto e exibir uma mensagem apropriada. Exemplo de saída: Digite um ano (4 dígitos): 2024 O ano 2024 é bissexto. Ou: Digite um ano (4 dígitos): 1900 O ano 1900 não é bissexto."
+>>>>>>> 2468430eda51af9516bdd4df24958956569dd432
         optimization_result = optimize_c("./cCodes", statement)
 
         print(optimization_result["message"])
-        print(optimization_result["result"])
+        print(optimization_result["resultado"])
 
         # Salvando o resultado da otimização em OtimizacaoCodigo.txt
         if optimization_result["message"] == "Code optimized":
             optimization_response = (
                 "############\nOtimização do Código C\n############\n"
             )
-            optimization_response += "\n".join(optimization_result["result"])
+            optimization_response += "\n".join(optimization_result["resultado"])
 
             try:
                 with open(
